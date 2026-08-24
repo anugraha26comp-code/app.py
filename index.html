@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minutes — Meeting Memory Board</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">PU · PS 6 Prototype</div>
+  <h1>Minutes</h1>
+  <p>Paste meeting notes on the left. Minutes reads through it, pins every decision and action item to the board, and tracks who owes what.</p>
+</header>
+
+<div class="layout">
+
+  <!-- LEFT: input notepad -->
+  <div class="notepad">
+    <h2>Meeting Notes</h2>
+    <div class="meta-row">
+      <input id="deptInput" placeholder="Department (e.g. Marketing)" />
+      <input id="dateInput" type="date" />
+    </div>
+    <textarea id="notesInput" placeholder="Paste or type your meeting transcript here...
+e.g.
+Priya: We decided to launch the campaign on Friday.
+Raj will send the budget report by Monday.
+Team discussed vendor options, no decision yet."></textarea>
+    <div class="btn-row">
+      <button class="primary" onclick="analyze()">Analyze Meeting</button>
+      <button class="ghost" onclick="loadSample()">Load sample</button>
+    </div>
+  </div>
+
+  <!-- RIGHT: extracted board -->
+  <div class="board">
+    <div class="stats">
+      <div class="stat"><b id="statMeetings">0</b><span>Meetings logged</span></div>
+      <div class="stat"><b id="statDecisions">0</b><span>Decisions</span></div>
+      <div class="stat"><b id="statActions">0</b><span>Action items</span></div>
+      <div class="stat"><b id="statOverdue">0</b><span>Overdue</span></div>
+    </div>
+
+    <div class="search">
+      <input id="searchInput" placeholder="Search decisions & tasks (e.g. budget, Raj)" oninput="render()" />
+    </div>
+
+    <div class="columns">
+      <div>
+        <p class="col-title">📌 Decisions</p>
+        <div id="decisionsList"></div>
+      </div>
+      <div>
+        <p class="col-title">✅ Action Items</p>
+        <div id="actionsList"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Minutes — Flask + JavaScript prototype.</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
